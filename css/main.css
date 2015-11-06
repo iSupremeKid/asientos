@@ -217,7 +217,20 @@ div#tarjetausuario{
 
 
 
+div.mensaje{
+    display: block;
+    padding: 0px 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
 
+div.mensaje.error{
+    background-color: #e74c3c;
+    border: 1px #c0392b solid;
+    color: #fff;
+    text-align: center;
+}
 
 
 

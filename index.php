@@ -1,8 +1,13 @@
 <?php
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);*/
 require_once('oculto/librerias/cabeceras.php');
 require_once('oculto/librerias/Seguridad.class.php');
+require_once('oculto/librerias/error.php');
 require_once('oculto/controlador/sesion.php');
 $sec = new Seguridad();
+$err = new Error();
 $sesion = new Sesion();
 $titulo = "Proyecto final | Contabilidad General";
 if($sesion->sesionIniciada() === true){
@@ -27,7 +32,11 @@ if($sesion->sesionIniciada() === true){
 	<title><?=$titulo;?></title>
 </head>
 <?php
-if($sesion->sesionIniciada() === true){
+if($sesion->sesionIniciada() === true && !$err->existeError()){
+	if($sec->validarToken($_GET['token']) === false){
+		$err->generarError('Token inválido, inicia sesion para regenerarlo');
+		header("Location: index.php");
+	}
 	$usuario = $sesion->obtenerDatosUsuario();
 	$token = $sec->generarToken();
 ?>
@@ -65,6 +74,17 @@ if($sesion->sesionIniciada() === true){
 
 <body>
 <div id="cajaLogin">
+	<?php
+	if($err->existeError() === true){
+	?>
+	<div class="mensaje error">
+		<i class="fa fa-exclamation-triangle"></i>&nbsp;<?=$err->obtenerMensajeError();?>
+	</div>
+	<?php
+	$err->depurarError();
+	}
+    setcookie('error', null, -1, '/');
+	?>
 	<p><i class="fa fa-lock"></i>&nbsp;Identifícate</p>
 	<form id="formuLogin" action="index.php" method="post">
 		<div class="campo">
