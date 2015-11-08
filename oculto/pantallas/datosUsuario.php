@@ -1,6 +1,6 @@
 <?php
-require_once('../oculto/controlador/sesion.php');
-require_once('../oculto/librerias/Seguridad.class.php');
+require_once(dirname(__FILE__).'/../../oculto/controlador/sesion.php');
+require_once(dirname(__FILE__).'/../../oculto/librerias/Seguridad.class.php');
 
 $datosModulo = [];
 
@@ -15,10 +15,14 @@ if($sec->validarToken($variablesModulo['token']) === false){
 }
 $usr = $s->obtenerDatosUsuario();
 $datosModulo['titulo'] = $usr['nombre'];
-$datosModulo['contenido'] = <<<EOT
-<div class="bloqueCentrado" id="tarjetausuario">
+$datosModulo['contenido'] = "
+<div class=\"bloqueCentrado\" id=\"tarjetausuario\">
 	<h3>Bienvenido</h3>
-	<h5><?=$usr['nombre'].' '.$usr['apePat'].' '.$usr['apeMat'];?></h5>
+	<h5>
+	".$usr['nombre']."
+	 ".$usr['apePat']."
+	  ".$usr['apeMat']."
+	  </h5>
 </div>
-EOT;
+";
 ?>
