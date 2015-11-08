@@ -5,13 +5,21 @@ error_reporting(E_ALL);*/
 require_once('oculto/librerias/cabeceras.php');
 require_once('oculto/librerias/Seguridad.class.php');
 require_once('oculto/librerias/error.php');
+require_once('oculto/controlador/modulo.php');
 require_once('oculto/controlador/sesion.php');
 $sec = new Seguridad();
 $err = new Error();
 $sesion = new Sesion();
-$titulo = "Proyecto final | Contabilidad General";
-if($sesion->sesionIniciada() === true){
-	$titulo = ucwords($_SESSION['nombre']) . " | " . $titulo;
+$token = $sec->generarToken();
+
+if($sesion->sesionIniciada() === true && !$err->existeError()){
+	$nomModuloArchivo = (isset($_GET['modulo'])) ? $_GET['modulo'] :'datosusuario';
+	$objModulo = new Modulo($nomModuloArchivo,array('token'=>$token));
+	$modulo = $objModulo->obtenerDatosModulo();
+	$tituloModulo = ucwords($modulo['titulo']) . " | Proyecto final | Contabilidad General";
+	$contenidoModulo = $modulo['contenido'];
+}else{
+	$tituloModulo = "Proyecto final | Contabilidad General";
 }
 ?><!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -29,47 +37,40 @@ if($sesion->sesionIniciada() === true){
     <link href='https://fonts.googleapis.com/css?family=Muli|Fjalla+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <link href="css/ed-grid.css" rel="stylesheet" type="text/css" />
-	<title><?=$titulo;?></title>
+	<title><?=$tituloModulo;?></title>
 </head>
 <?php
-if($sesion->sesionIniciada() === true && !$err->existeError()){
-	if($sec->validarToken($_GET['token']) === false){
-		$err->generarError('Token inválido, inicia sesion para regenerarlo');
-		header("Location: index.php");
-	}
-	$usuario = $sesion->obtenerDatosUsuario();
-	$token = $sec->generarToken();
+if($sesion->sesionIniciada() === true){
 ?>
 <body id="bodyLogu" data-token="<?=$token;?>">
 <div class="grupo">
 	<div id="tituloGen" class="caja total"><h1>Asientos contables</h1><h2>Proyecto final de contabilidad general</h2></div>
 	<div id="menuIzq" class="caja movil-1-3">
 		<p class="tituloBloque"><i class="fa fa-bars"></i>&nbsp;Libro diario</p>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('');" class="btnResaltado opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Registrar asiento</button>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Cerrar ejercicio</button>
+			<button onclick="mostrarSeccion('','<?=$token;?>');" class="btnResaltado opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Registrar asiento</button>
+			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Cerrar ejercicio</button>
 
 		<p class="tituloBloque"><i class="fa fa-table"></i>&nbsp;Reportes</p>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver cierres realizados</button>
+			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver cierres realizados</button>
 
 		<p class="tituloBloque"><i class="fa fa-cog"></i>&nbsp;Asientos contables</p>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Añadir asiento personalizado</button>
+			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Añadir asiento personalizado</button>
 
 		<p class="tituloBloque"><i class="fa fa-eye"></i>&nbsp;Plan contable</p>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver Mi plan contable</button>
+			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver Mi plan contable</button>
 
 		<p class="tituloBloque"><i class="fa fa-user"></i>&nbsp;Usuario</p>
-			<button data-token="<?=$token;?>" onclick="mostrarSeccion('datosUsuario');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver mis datos de usuario</button>
-			<button data-token="<?=$token;?>" class="opcBloque" onclick="cerrarSesion('<?=$token;?>')"><i class="fa fa-caret-right"></i>&nbsp;Cerrar sesión</button>
+			<button onclick="mostrarSeccion('datosUsuario','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver mis datos de usuario</button>
+			<button class="opcBloque" onclick="cerrarSesion('<?=$token;?>')"><i class="fa fa-caret-right"></i>&nbsp;Cerrar sesión</button>
 	</div>
 	<div id="contenedor" class="caja movil-2-3">
-		
-
+		<?php echo $contenidoModulo;?>
 	</div>
 	<div id="pieGen" class="caja total"></div>
 </div>
 <?php
 }else{
-	$token = $sec->generarToken();
+	
 ?>
 
 <body>
