@@ -13,7 +13,7 @@ $sesion = new Sesion();
 $token = $sec->generarToken();
 
 if($sesion->sesionIniciada() === true && !$err->existeError()){
-	$nomModuloArchivo = (isset($_GET['modulo'])) ? $_GET['modulo'] :'datosusuario';
+	$nomModuloArchivo = (isset($_GET['modulo'])) ? $_GET['modulo'] :'datosUsuario';
 	$objModulo = new Modulo($nomModuloArchivo,array('token'=>$token));
 	$modulo = $objModulo->obtenerDatosModulo();
 	$tituloModulo = ucwords($modulo['titulo']) . " | Proyecto final | Contabilidad General";
