@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require '../oculto/librerias/cabeceras.php';
 require '../oculto/librerias/Seguridad.class.php';
 $s = new Seguridad();

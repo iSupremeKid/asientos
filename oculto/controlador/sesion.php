@@ -10,7 +10,7 @@ class Sesion{
 			$datosU = $this->usrG->obtenerDatosUsuario($usuario,$clave);
 			if(gettype($datosU) === 'array'){
 				$this->usrG->actualizarUltimoIngreso() === true;
-				session_start();
+				if (session_status() === PHP_SESSION_NONE){session_start();}
 				$_SESSION['codigo'] = $datosU['codigo'];
 				$_SESSION['nombre'] = $datosU['nombre'];
 				$_SESSION['apePat'] = $datosU['apePat'];
@@ -30,12 +30,12 @@ class Sesion{
 		}
 	}
 	public function sesionIniciada(){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		return isset($_SESSION['codigo']);
 	}
 	public function obtenerDatosUsuario(){
 		if($this->sesionIniciada() === true){
-			session_start();
+			if (session_status() === PHP_SESSION_NONE){session_start();}
 			return array(
 				 'codigo' =>  $_SESSION['codigo'],
 				 'nombre' =>  $_SESSION['nombre'],
@@ -48,7 +48,7 @@ class Sesion{
 		}
 	}
 	public function cerrarSesion($msj = "Cerraste tu sesión"){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		session_regenerate_id(true);
 		$_SESSION = array();
 		if (ini_get("session.use_cookies")) {
@@ -62,7 +62,7 @@ class Sesion{
 		return array(true,$msj);
 	}
 	public function comprobarSesionExpirada($tiempo){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		if (isset($_SESSION['ultima_actividad']) && (time() - $_SESSION['ultima_actividad'] > $tiempo)) {
 			return $this->cerrarSesion();
 		}else{

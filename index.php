@@ -57,7 +57,7 @@ if($sesion->sesionIniciada() === true){
 			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Añadir asiento personalizado</button>
 
 		<p class="tituloBloque"><i class="fa fa-eye"></i>&nbsp;Plan contable</p>
-			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver Mi plan contable</button>
+			<button onclick="mostrarSeccion('planContable','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver Mi plan contable</button>
 
 		<p class="tituloBloque"><i class="fa fa-user"></i>&nbsp;Usuario</p>
 			<button onclick="mostrarSeccion('datosUsuario','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver mis datos de usuario</button>
@@ -84,7 +84,6 @@ if($sesion->sesionIniciada() === true){
 	<?php
 	$err->depurarError();
 	}
-    setcookie('error', null, -1, '/');
 	?>
 	<p><i class="fa fa-lock"></i>&nbsp;Identifícate</p>
 	<form id="formuLogin" action="index.php" method="post">

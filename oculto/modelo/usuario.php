@@ -22,7 +22,7 @@ class Usuario{
 		}
 	}
 	public function actualizarUltimoIngreso(){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		return $this->bd->query("UPDATE usuario SET ultima_conexion = ".time()." WHERE codigo = ".intval($_SESSION['codigo'])."");
 	}
 }

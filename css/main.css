@@ -230,7 +230,22 @@ div.mensaje.error{
     text-align: center;
 }
 
-
+td.elemento{
+    background-color: #000;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    padding: 5px;
+    font-size: 1.05rem;
+}
+td.cuenta{
+    background-color: #fff;
+    font-weight: bold;
+    text-align: left;
+    color: #000;
+    padding: 2px;
+    font-size: 1.02rem;
+}
 
 
 

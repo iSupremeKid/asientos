@@ -4,13 +4,13 @@ class Seguridad{
 
 	}
 	public function generarToken(){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		$nuevoToken = md5(microtime());
 		$_SESSION['token'] = $nuevoToken;
 		return $nuevoToken;
 	}
 	public function validarToken($cadena,$regenerar = false){
-		session_start();
+		if (session_status() === PHP_SESSION_NONE){session_start();}
 		$cadena = filter_var($cadena, FILTER_SANITIZE_EMAIL);//
 		//echo "$_SESSION['token']";
 		if($regenerar === false){

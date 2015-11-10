@@ -1,18 +1,7 @@
 <?php
-require_once(dirname(__FILE__).'/../../oculto/controlador/sesion.php');
-require_once(dirname(__FILE__).'/../../oculto/librerias/Seguridad.class.php');
-
+require_once(dirname(__FILE__)."/../librerias/cabeceraPrivados.php");
 $datosModulo = [];
 
-$s = new Sesion();
-$sec = new Seguridad();
-if($s->sesionIniciada() === false){
-	exit("No haz iniciado sesión");
-}
-
-if($sec->validarToken($variablesModulo['token']) === false){
-	exit("Token incorrecto");
-}
 $usr = $s->obtenerDatosUsuario();
 $datosModulo['titulo'] = $usr['nombre'];
 $datosModulo['contenido'] = "
