@@ -24,5 +24,19 @@ class PlanContable{
 			return 0;
 		}
 	}
+	public function obtenerCuentasJSON(){
+		$planContable = array();
+		if($this->bd !== null){
+			//$qElem = $this->bd->query("SELECT nombre FROM PlanContable WHERE predecesor IS NULL");
+			$qElem = $this->bd->query("SELECT * FROM PlanContable ORDER BY LENGTH(predecesor),predecesor ASC");
+			$elementos = $qElem->fetch_all(MYSQLI_ASSOC);
+			$cantElementos = count($elementos);
+			$arbol = new Arbol($elementos,'codigo','predecesor');
+			return $arbol->obtenerJSONArbol();
+
+		}else{
+			return 0;
+		}
+	}
 }
 ?>

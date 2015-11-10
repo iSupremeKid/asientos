@@ -16,6 +16,7 @@ class Sesion{
 				$_SESSION['apePat'] = $datosU['apePat'];
 				$_SESSION['apeMat'] = $datosU['apeMat'];
 				$_SESSION['usuario'] = $datosU['usuario'];
+				$_SESSION['actualAsiento'] = $datosU['numeroAsientoActual'];
 				$_SESSION['ultima_actividad'] = time();
 				return array(true,"Bienvenid@ ".$_SESSION['nombre']);
 			}else{

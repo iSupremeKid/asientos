@@ -47,7 +47,7 @@ if($sesion->sesionIniciada() === true){
 	<div id="tituloGen" class="caja total"><h1>Asientos contables</h1><h2>Proyecto final de contabilidad general</h2></div>
 	<div id="menuIzq" class="caja movil-1-3">
 		<p class="tituloBloque"><i class="fa fa-bars"></i>&nbsp;Libro diario</p>
-			<button onclick="mostrarSeccion('','<?=$token;?>');" class="btnResaltado opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Registrar asiento</button>
+			<button onclick="mostrarSeccion('agregarAsiento','<?=$token;?>');" class="btnResaltado opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Registrar asiento</button>
 			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Cerrar ejercicio</button>
 
 		<p class="tituloBloque"><i class="fa fa-table"></i>&nbsp;Reportes</p>
