@@ -37,6 +37,7 @@ if($sesion->sesionIniciada() === true && !$err->existeError()){
     <link href='https://fonts.googleapis.com/css?family=Muli|Fjalla+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <link href="css/ed-grid.css" rel="stylesheet" type="text/css" />
+	<script src="js/array_merge.js"></script>
 	<script src="js/ajax.js"></script>
 	<title><?=$tituloModulo;?></title>
 </head>
