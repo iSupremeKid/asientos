@@ -63,8 +63,22 @@ body{
 
 .bloqueCentrado{
     display: block;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
+}
+div#cargando{
+    background-color: rgba(0,0,0,0.8);
+    background-image: url('../img/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;;
+    display: none;
+    height:100%;
+    left: 0px;
+    position: absolute;
+    top:0px;
+    width:100%;
+    z-index: 3000;
 }
 
 div#cajaLogin{
@@ -247,6 +261,15 @@ td.cuenta{
     font-size: 1.02rem;
 }
 
+div#formularioLlenado select{
+    display: block;
+    width:100%!important;
+}
+div#formularioLlenado button.elim{
+    background-color: #ecf0f1;
+    border: 1px #bdc3c7 solid;
+    color: #e74c3c;
+}
 
 
 /* ==========================================================================

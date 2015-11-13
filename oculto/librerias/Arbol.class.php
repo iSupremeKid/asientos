@@ -33,7 +33,7 @@ class Arbol{
 			if($comenzarPushHijos === true){
 				$elementoNuevo['hijos'] = array();
 				if(array_key_exists($elementoNuevo[$nombreCampoIdentificador],$arrayAuxiliar)){
-					array_push($elementoNuevo['hijos'], $arrayAuxiliar[$elementoNuevo[$nombreCampoIdentificador]]);
+					array_push($elementoNuevo['hijos'], array_reverse($arrayAuxiliar[$elementoNuevo[$nombreCampoIdentificador]]));
 				}
 			}
 
@@ -55,7 +55,6 @@ class Arbol{
 
 	private function sacarElemento($indice,&$array){
 		$aux = $array[$indice];
-		//unset($array[$indice]);
 		return $aux;
 	}
 }

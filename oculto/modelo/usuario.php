@@ -2,7 +2,7 @@
 class Usuario{
 	private $bd = null;
 	public function Usuario(){
-		$mysqli = new mysqli("localhost", "pFinalContab", "k7swurUc", "asientosSis");
+		$mysqli = new mysqli("localhost", "root", "", "asientossis");
 		if(!$mysqli->connect_errno) {
 			$this->bd = $mysqli;
 		}
@@ -11,7 +11,7 @@ class Usuario{
 	public function obtenerDatosUsuario($usr,$psw){
 		if($this->bd !== null){
 			$psw = md5($psw);
-			$r = $this->bd->query("SELECT codigo,nombre,apePat,apeMat,usuario FROM usuario WHERE usuario = '".$usr."' AND clave = '".$psw."'");
+			$r = $this->bd->query("SELECT codigo,nombre,apePat,apeMat,usuario,actualAsiento FROM usuario WHERE usuario = '".$usr."' AND clave = '".$psw."'");
 			if($r->num_rows === 1){
 				return $r->fetch_assoc();
 			}else{

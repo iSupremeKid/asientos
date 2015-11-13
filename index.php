@@ -30,13 +30,14 @@ if($sesion->sesionIniciada() === true && !$err->existeError()){
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" href="css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link href='https://fonts.googleapis.com/css?family=Muli|Fjalla+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <link href="css/ed-grid.css" rel="stylesheet" type="text/css" />
+	<script src="js/ajax.js"></script>
 	<title><?=$tituloModulo;?></title>
 </head>
 <?php
@@ -48,13 +49,14 @@ if($sesion->sesionIniciada() === true){
 	<div id="menuIzq" class="caja movil-1-3">
 		<p class="tituloBloque"><i class="fa fa-bars"></i>&nbsp;Libro diario</p>
 			<button onclick="mostrarSeccion('agregarAsiento','<?=$token;?>');" class="btnResaltado opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Registrar asiento</button>
-			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Cerrar ejercicio</button>
+			<button onclick="mostrarSeccion('libroDiario','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Mostrar mi libro diario</button>
+			<button onclick="mostrarSeccion('cerrarEjercicio','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Cerrar ejercicio</button>
 
 		<p class="tituloBloque"><i class="fa fa-table"></i>&nbsp;Reportes</p>
-			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver cierres realizados</button>
+			<button onclick="mostrarSeccion('reportes','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver cierres realizados</button>
 
-		<p class="tituloBloque"><i class="fa fa-cog"></i>&nbsp;Asientos contables</p>
-			<button onclick="mostrarSeccion('','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Añadir asiento personalizado</button>
+		<p class="tituloBloque"><i class="fa fa-cog"></i>&nbsp;Cuentas</p>
+			<button onclick="mostrarSeccion('agregarCuenta','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Añadir cuenta personalizado</button>
 
 		<p class="tituloBloque"><i class="fa fa-eye"></i>&nbsp;Plan contable</p>
 			<button onclick="mostrarSeccion('planContable','<?=$token;?>');" class="opcBloque"><i class="fa fa-caret-right"></i>&nbsp;Ver Mi plan contable</button>
@@ -129,7 +131,8 @@ if($sesion->sesionIniciada() === true){
 }
 ?>
 	<script src="js/sweetalert.min.js"></script>
-	<script src="js/ajax.js"></script>
 	<script src="js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="js/mainJQ.js"></script>
 </body>
 </html>
